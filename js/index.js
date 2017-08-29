@@ -1,12 +1,12 @@
 $(document).ready(function() {
-	
+
 	function inputReset() {
 		// reset input form
 				$(".keyword").val('').blur();
 				$(".load").remove();
-							
+
 	}
-	
+
 	function errorMessage() {
 		// error, something went wrong
 					$(".keyword").val("").blur();
@@ -15,7 +15,7 @@ $(document).ready(function() {
 						'<div class="error">Something went wrong. Please try again or refresh!</div>'
 					);
 	}
-	
+
 	// GET INPUT WHEN ENTER IS PRESSED
 	$(".keyword").keyup(function(event) {
 		if (event.keyCode == 13) {
@@ -36,9 +36,9 @@ $(document).ready(function() {
 				},
 				dataType: "jsonp",
 				success: function(data) {
-					
+
 					inputReset();
-					
+
 					// if there are no results
 					if (data.query.searchinfo.totalhits === 0) {
 						$(".header").css("padding-top", "200px");
@@ -49,23 +49,22 @@ $(document).ready(function() {
 								'</span>' +
 								'... Please try again!'
 						);
-					} 
+					}
 					// if the search yielded results
 					else {
 						for (var i = 0; i <= 12; i++) {
 							// STORE DATA
-							var title = data.query.search[i].title;
+							var articleTitle = data.query.search[i].title;
 							var summary = data.query.search[i].snippet;
 							var url =
 								"https://en.wikipedia.org/?curid=" + data.query.search[i].pageid;
-							console.log(title);
 							// PUT RESULTS IN DOM
 							$(".header").css("padding-top", "50px");
 							$(".row").append(
 								'<div class="col-md-12"><div class="content"><h2 class="title titleSearch"><a href="' +
 									url +
 									'">' +
-									title +
+									articleTitle +
 									"</a>" +
 									"</h2>" +
 									'<p class="summary">' +
@@ -89,8 +88,8 @@ $(document).ready(function() {
 				'<div class="load"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></div>'
 			);
 		inputReset();
-		
-		
+
+
 		// AJAX CALL
 		$.ajax({
 			url: "https://en.wikipedia.org/w/api.php",
@@ -110,7 +109,7 @@ $(document).ready(function() {
 
 				for (var i = 0; i <= 3; i++) {
 					// STORE DATA
-					var title = data.query.random[i].title;
+					var articleTitle = data.query.random[i].title;
 					var url = "https://en.wikipedia.org/?curid=" + data.query.random[i].id;
 
 					// INPUT IN DOM
@@ -119,7 +118,7 @@ $(document).ready(function() {
 						'<span class="randomArticles"><a href="' +
 							url +
 							'"> ' +
-							title +
+							articleTitle +
 							' </a></span>'
 					);
 				}
