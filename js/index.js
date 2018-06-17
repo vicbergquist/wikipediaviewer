@@ -52,7 +52,7 @@ $(document).ready(function() {
 					}
 					// if the search yielded results
 					else {
-						for (var i = 0; i <= 12; i++) {
+						for (var i = 0; i <= 11; i++) {
 							// STORE DATA
 							var articleTitle = data.query.search[i].title;
 							var summary = data.query.search[i].snippet;
